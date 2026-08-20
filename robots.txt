@@ -1,0 +1,9 @@
+# Crohnbook — https://crohnbook.nl/
+# De landingspagina mag geïndexeerd worden. De app zelf is een leeg dagboek
+# zonder inhoud; die staat op noindex in de pagina zelf, zodat crawlers hem wel
+# mogen ophalen maar niet in de resultaten zetten.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://crohnbook.nl/sitemap.xml
