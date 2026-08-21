@@ -1,0 +1,404 @@
+/* Crohnbook — gedeelde opmaak voor alle pagina's op crohnbook.nl.
+   De kleuren komen uit de app (src/index.css), zodat site en dagboek niet als
+   twee losse producten voelen. */
+
+:root {
+  color-scheme: dark;
+  --ink: #0a1018;
+  --surface: #141c28;
+  --raised: #1e2938;
+  --line: #2b384b;
+  --body: #e7eef7;
+  --muted: #97a8bd;
+  --accent: #17b8a6;
+  --accent-deep: #0f6f66;
+  --caution: #f59e0b;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", "Cascadia Mono", Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation: none !important; transition: none !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--body);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 22px; }
+
+h1, h2, h3 { text-wrap: balance; line-height: 1.18; margin: 0; letter-spacing: -0.02em; }
+h1 { font-size: clamp(29px, 6vw, 43px); font-weight: 700; }
+h2 { font-size: clamp(22px, 4.2vw, 28px); font-weight: 650; }
+h3 { font-size: 18px; font-weight: 650; letter-spacing: -0.01em; }
+p { margin: 0; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* ---------- navigatie ---------- */
+
+.topbalk {
+  border-bottom: 1px solid var(--line);
+  background: var(--ink);
+}
+.topbalk .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+.merk {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  color: var(--body);
+  text-decoration: none;
+}
+.merk svg { display: block; flex: none; }
+.topbalk nav {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  font-size: 15px;
+}
+.topbalk nav a { color: var(--muted); text-decoration: none; }
+.topbalk nav a:hover, .topbalk nav a[aria-current="page"] { color: var(--body); }
+
+.kruimels {
+  font-size: 14px;
+  color: var(--muted);
+  padding-top: 22px;
+}
+.kruimels a { color: var(--muted); }
+
+/* ---------- secties ---------- */
+
+section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 44px 0;
+  border-top: 1px solid var(--line);
+}
+section:first-of-type { border-top: 0; }
+section p { color: var(--muted); }
+section p.lead { color: var(--body); }
+
+header.kop {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 46px 0 40px;
+}
+header.kop p.tagline {
+  font-size: clamp(18px, 3.4vw, 21px);
+  color: var(--muted);
+  max-width: 40ch;
+}
+
+/* Het directe antwoord bovenaan een pagina: de zin die een zoekmachine of een
+   AI-assistent kan overnemen zonder de rest te lezen. */
+.antwoord {
+  border-left: 3px solid var(--accent-deep);
+  padding: 2px 0 2px 16px;
+  font-size: 17.5px;
+  color: var(--body);
+}
+
+.bijwerk {
+  font-size: 13.5px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- kaarten en lijsten ---------- */
+
+.kaarten {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+.kaart {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.kaart p { font-size: 15px; }
+
+/* De bolletjes staan absoluut in plaats van als grid- of flexcel: tekst en <b>
+   binnen één li zouden anders elk een eigen cel worden en per woord afbreken. */
+ul.punten {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+ul.punten li {
+  position: relative;
+  padding-left: 22px;
+  color: var(--muted);
+  font-size: 16px;
+}
+ul.punten li b { color: var(--body); font-weight: 650; }
+ul.punten li::before {
+  content: "";
+  position: absolute;
+  left: 1px;
+  top: 10px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-deep);
+}
+ul.punten.niet li::before { background: var(--caution); }
+
+ol.stappen {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  counter-reset: s;
+}
+ol.stappen li {
+  counter-increment: s;
+  position: relative;
+  padding-left: 38px;
+  min-height: 26px;
+  font-size: 15.5px;
+  color: var(--body);
+}
+ol.stappen li::before {
+  content: counter(s);
+  position: absolute;
+  left: 0;
+  top: 1px;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--raised);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+ol.stappen li p { color: var(--muted); font-size: 15px; margin-top: 3px; }
+ol.stappen .glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  vertical-align: -7px;
+  margin: 0 1px;
+  border-radius: 6px;
+  background: var(--raised);
+  border: 1px solid var(--line);
+  color: var(--accent);
+}
+ol.stappen .glyph svg { display: block; }
+
+/* ---------- knoppen en adressen ---------- */
+
+.knop {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  align-self: flex-start;
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: var(--accent-deep);
+  color: #ffffff;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+.knop:hover { background: #14837a; }
+.knop.stil { background: transparent; border-color: var(--line); color: var(--body); }
+.knop.stil:hover { background: var(--raised); }
+
+.adres {
+  font-family: var(--mono);
+  font-size: 15px;
+  color: var(--body);
+  background: var(--raised);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 12px;
+  align-self: flex-start;
+}
+
+/* ---------- installatieblok ---------- */
+
+.install {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.install h2 { font-size: 20px; }
+.install p { color: var(--muted); font-size: 15.5px; }
+
+.variant { display: none; flex-direction: column; gap: 14px; }
+.install[data-state="algemeen"] .variant[data-for="algemeen"],
+.install[data-state="ios-safari"] .variant[data-for="ios-safari"],
+.install[data-state="ios-anders"] .variant[data-for="ios-anders"],
+.install[data-state="in-app"] .variant[data-for="in-app"],
+.install[data-state="android"] .variant[data-for="android"],
+.install[data-state="desktop"] .variant[data-for="desktop"],
+.install[data-state="geinstalleerd"] .variant[data-for="geinstalleerd"] { display: flex; }
+
+.qr { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+.qr img {
+  width: 132px;
+  height: 132px;
+  padding: 10px;
+  background: var(--raised);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+/* Alleen de kolom naast de code, niet het adresvakje dat erin zit. */
+.qr > div { flex: 1 1 220px; display: flex; flex-direction: column; gap: 10px; }
+
+/* ---------- uitgelicht blok ---------- */
+
+.blok {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.blok.let-op { border-left: 3px solid var(--caution); }
+.blok p { font-size: 15.5px; }
+.blok h3 { font-size: 17px; }
+
+/* ---------- tabel ---------- */
+
+.tabel-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+}
+table { border-collapse: collapse; width: 100%; min-width: 460px; font-size: 15px; }
+th, td { text-align: left; padding: 11px 16px; border-bottom: 1px solid var(--line); }
+thead th {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  background: var(--raised);
+}
+td { color: var(--muted); }
+td b { color: var(--body); font-weight: 650; }
+tbody tr:last-child td { border-bottom: 0; }
+
+/* ---------- faq ---------- */
+
+.faq { display: flex; flex-direction: column; }
+details { border-bottom: 1px solid var(--line); padding: 14px 0; }
+details:first-of-type { border-top: 1px solid var(--line); }
+summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16.5px;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: center;
+}
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; color: var(--muted); font-weight: 400; font-size: 20px; line-height: 1; }
+details[open] summary::after { content: "\2212"; }
+details p { color: var(--muted); font-size: 15.5px; padding-top: 10px; }
+details p + p { padding-top: 8px; }
+
+/* ---------- maker ---------- */
+
+.maker {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 20px 22px;
+}
+.maker .cirkel {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--raised);
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+}
+.maker div.tekst { display: flex; flex-direction: column; gap: 8px; }
+.maker p { font-size: 15.5px; color: var(--muted); }
+
+/* ---------- voetregel ---------- */
+
+footer {
+  border-top: 1px solid var(--line);
+  padding: 32px 0 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-size: 14px;
+  color: var(--muted);
+}
+footer strong { color: var(--body); font-weight: 600; }
+footer nav { display: flex; gap: 16px; flex-wrap: wrap; }
+footer .disclaimer {
+  border-left: 3px solid var(--caution);
+  padding-left: 14px;
+}
+
+@media (max-width: 480px) {
+  body { font-size: 16px; }
+  .install, .blok, .maker { padding: 18px; }
+  .topbalk nav { gap: 14px; font-size: 14.5px; }
+}

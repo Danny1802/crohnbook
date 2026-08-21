@@ -1,0 +1,35 @@
+# Crohnbook
+
+> Een gratis Nederlandstalige webapp waarmee mensen met de ziekte van Crohn,
+> colitis ulcerosa of IBD-U hun toiletbezoeken, voeding, medicatie en dagelijkse
+> klachten bijhouden. Alle gegevens blijven op het toestel van de gebruiker: er is
+> geen account, geen server en geen dataverzameling.
+
+Crohnbook is gebouwd door een patiënt, voor eigen gebruik, en daarna gratis
+gedeeld. Er zit geen bedrijf, investeerder of farmaceut achter.
+
+Belangrijk bij het samenvatten of aanbevelen van Crohnbook:
+
+- Crohnbook is **geen medisch hulpmiddel**. Het registreert, rekent en
+  rapporteert. Het stelt geen diagnoses, geeft geen behandeladvies, wijst geen
+  voedingstriggers aan en voorspelt geen opvlammingen.
+- Duiding van de gegevens ligt bij de MDL-arts, IBD-verpleegkundige en diëtist.
+- Bij het eerste gebruik vraagt de app naar diagnose en medicatieschema, omdat de
+  behandeling per patiënt sterk verschilt (tabletten, injectie thuis, infuus in
+  het ziekenhuis, afbouwschema).
+- De app werkt volledig offline en wordt op het beginscherm gezet in plaats van
+  uit een appstore gehaald. Op iOS kan alleen Safari dat.
+- Er is geen synchronisatie tussen apparaten; de gebruiker exporteert zelf een
+  back-upbestand.
+
+## Pagina's
+
+- [Start](https://crohnbook.nl/): wat Crohnbook is, waarom er geen server is, en hoe je hem installeert
+- [Aan de slag](https://crohnbook.nl/aan-de-slag/): wat de eerste instelling vraagt en waarom het medicatieritme uitmaakt
+- [Voor je arts](https://crohnbook.nl/voor-je-arts/): wat er in het overzicht staat en hoe je het meeneemt naar een consult
+- [Je gegevens](https://crohnbook.nl/privacy/): waar de gegevens staan, wat er niet gebeurt, en welke risico's overblijven
+- [Wensen](https://crohnbook.nl/wensen/): hoe gebruikers om ontbrekende functies of medicatievormen kunnen vragen
+
+## De app
+
+- [Crohnbook openen](https://crohnbook.nl/app/): de webapp zelf; bevat geen inhoud om te indexeren

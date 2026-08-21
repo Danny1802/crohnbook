@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vertel wat je mist — Crohnbook</title>
+<meta name="description" content="Mis je een medicatievorm, een klacht die je wilt bijhouden of een functie in Crohnbook? Vraag ernaar. Er is geen formulier dat je gegevens opslaat: je eigen mailprogramma verstuurt het bericht.">
+<link rel="canonical" href="https://crohnbook.nl/wensen/">
+<meta name="theme-color" content="#0a1018">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="nl_NL">
+<meta property="og:url" content="https://crohnbook.nl/wensen/">
+<meta property="og:site_name" content="Crohnbook">
+<meta property="og:title" content="Vertel wat je mist — Crohnbook">
+<meta property="og:description" content="Mis je een medicatievorm of een functie? Vraag ernaar. Geen formulier dat gegevens opslaat.">
+<meta property="og:image" content="https://crohnbook.nl/app/icon-512.png">
+<meta name="twitter:card" content="summary">
+
+<link rel="icon" href="/app/icon-192.png">
+<link rel="stylesheet" href="/stijl.css">
+<style>
+  .veld { display: flex; flex-direction: column; gap: 7px; }
+  .veld label { font-size: 15.5px; font-weight: 600; color: var(--body); }
+  .veld .hint { font-size: 14px; color: var(--muted); }
+  .veld input, .veld textarea, .veld select {
+    font: inherit;
+    font-size: 16px;
+    color: var(--body);
+    background: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    padding: 11px 13px;
+    width: 100%;
+    resize: vertical;
+  }
+  .veld textarea { min-height: 110px; line-height: 1.55; }
+  .veld input:focus, .veld textarea:focus, .veld select:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+    border-color: transparent;
+  }
+  form.wensen { display: flex; flex-direction: column; gap: 18px; }
+  .melding { font-size: 14.5px; color: var(--caution); }
+  .melding[hidden] { display: none; }
+</style>
+</head>
+<body>
+
+<div class="topbalk">
+  <div class="wrap">
+    <a class="merk" href="/">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="3" y="2.5" width="18" height="19" rx="3" stroke="#17b8a6" stroke-width="1.8"/>
+        <path d="M7.5 2.5v19" stroke="#17b8a6" stroke-width="1.8"/>
+        <path d="M11 8.5h6M11 12h6M11 15.5h3.5" stroke="#97a8bd" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      Crohnbook
+    </a>
+    <nav aria-label="Hoofdmenu">
+      <a href="/aan-de-slag/">Aan de slag</a>
+      <a href="/voor-je-arts/">Voor je arts</a>
+      <a href="/privacy/">Je gegevens</a>
+      <a href="/wensen/" aria-current="page">Wensen</a>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <nav class="kruimels" aria-label="Kruimelpad">
+    <a href="/">Crohnbook</a> &rsaquo; Wensen
+  </nav>
+
+  <header class="kop">
+    <h1>Vertel wat je mist</h1>
+    <p class="antwoord"><strong>IBD ziet er bij niemand hetzelfde uit.</strong> Crohnbook is gebouwd vanuit één behandeling en één lichaam, en kent dus lang niet alles wat er bestaat. Wat voor jou het verschil maakt, hoort er misschien nog niet in.</p>
+    <p class="bijwerk">Laatst bijgewerkt: 21 augustus 2026</p>
+  </header>
+
+  <section>
+    <h2>Waar je aan kunt denken</h2>
+    <div class="kaarten">
+      <div class="kaart">
+        <h3>Je medicatie</h3>
+        <p>Een toedieningsvorm die niet herkend wordt, een interval dat niet past, een afbouwschema of een combinatie van middelen.</p>
+      </div>
+      <div class="kaart">
+        <h3>Klachten die ontbreken</h3>
+        <p>Vermoeidheid, gewrichtsklachten, huid- of oogklachten, misselijkheid, koorts — dingen die bij IBD horen maar nu niet vast te leggen zijn.</p>
+      </div>
+      <div class="kaart">
+        <h3>Jouw situatie</h3>
+        <p>Een stoma, een pouch, een fistel, zwangerschap, of een kind dat je helpt bijhouden. Allemaal situaties waar het anders werkt.</p>
+      </div>
+      <div class="kaart">
+        <h3>Praktische dingen</h3>
+        <p>Iets in de rapportage dat je arts nodig heeft, grotere letters, een andere indeling, of iets dat gewoon niet werkt op jouw toestel.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Zo werkt het versturen</h2>
+
+    <p class="antwoord">Hieronder staat geen echt formulier. Er is niets dat je invoer opslaat of doorstuurt — het vult alleen een e-mail voor je in die je zelf verstuurt vanuit je eigen mailprogramma.</p>
+
+    <p>Dat is bewust zo, om dezelfde reden als de rest: <a href="/privacy/">er is geen server</a> die iets van je zou kunnen bewaren. Zolang je niet op verzenden drukt, gaat er niets weg. Alles wat je hier typt blijft in je browser.</p>
+
+    <!-- novalidate: het veld houdt required voor schermlezers, maar de melding
+         komt uit de pagina zelf zodat hij in het Nederlands en in dezelfde toon
+         staat als de rest. Zonder novalidate onderschept de browser de submit en
+         wordt onze eigen melding nooit getoond. -->
+    <form class="wensen" id="wensenform" novalidate>
+      <div class="veld">
+        <label for="wat">Wat mis je?</label>
+        <span class="hint">Beschrijf het gerust in gewone taal. Eén zin is genoeg.</span>
+        <textarea id="wat" name="wat" required></textarea>
+      </div>
+
+      <div class="veld">
+        <label for="waarom">Wat zou het je opleveren? <span class="hint">(mag je overslaan)</span></label>
+        <span class="hint">Dit helpt om te kiezen wat het eerst aan de beurt is.</span>
+        <textarea id="waarom" name="waarom"></textarea>
+      </div>
+
+      <div class="veld">
+        <label for="vorm">Welke behandelvorm gebruik je? <span class="hint">(mag je overslaan)</span></label>
+        <select id="vorm" name="vorm">
+          <option value="">Zeg ik liever niet</option>
+          <option>Tabletten of granulaat, dagelijks</option>
+          <option>Injectie thuis, wekelijks of om de paar weken</option>
+          <option>Infuus in het ziekenhuis</option>
+          <option>Afbouwschema</option>
+          <option>Een combinatie</option>
+          <option>Op dit moment geen medicatie</option>
+          <option>Anders</option>
+        </select>
+      </div>
+
+      <button class="knop" type="submit">E-mail openen met dit bericht</button>
+      <p class="melding" id="melding" hidden>Vul eerst in wat je mist.</p>
+    </form>
+
+    <!-- Het adres staat hier één keer. Het script hieronder leest het uit deze
+         link, zodat er bij een wijziging niets uit de pas kan gaan lopen.
+         Geregistreerd als crohnbooknl@gmail.com; Gmail negeert punten, dus deze
+         schrijfwijze komt op dezelfde bus binnen en leest rustiger. -->
+    <p>Werkt de knop niet, bijvoorbeeld omdat er geen mailprogramma is ingesteld? Stuur dan zelf een bericht naar <a id="mailadres" href="mailto:crohnbook.nl@gmail.com">crohnbook.nl@gmail.com</a>.</p>
+  </section>
+
+  <section>
+    <h2>Wat er met je bericht gebeurt</h2>
+
+    <ul class="punten">
+      <li><b>Het komt bij één persoon terecht.</b> Geen ticketsysteem, geen team, geen externe dienst die meeleest.</li>
+      <li><b>Je e-mailadres zie ik</b>, want zo werkt e-mail nu eenmaal. Het wordt nergens voor gebruikt behalve om je eventueel terug te schrijven, en het komt op geen enkele lijst.</li>
+      <li><b>Je bericht wordt verwijderd</b> zodra het is verwerkt of beantwoord.</li>
+    </ul>
+
+    <div class="blok let-op">
+      <h3>Stuur geen medische gegevens mee</h3>
+      <p>Geen uitslagen, geen brieven van je arts, geen export van je logboek, geen foto's. Om te begrijpen wat je mist is dat niet nodig, en gewone e-mail is er niet de plek voor. Heb je een medische vraag, stel die dan aan je eigen behandelaar — die kan hem beantwoorden, ik niet.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Wat je mag verwachten</h2>
+
+    <p class="lead">Eerlijk zijn is hier belangrijker dan beleefd zijn, dus: dit is geen dienst met een helpdesk.</p>
+
+    <p>Crohnbook wordt in vrije uren gemaakt door één persoon die zelf de ziekte van Crohn heeft. Dat betekent dat een antwoord kan duren, en dat het soms stil is in periodes waarin het minder goed gaat. Het betekent ook dat een verzoek dat past bij hoe de app bedoeld is, echt kans maakt om erin te komen — er zit geen productmanager tussen.</p>
+
+    <p>Wat vrijwel zeker <i>niet</i> gebeurt: functies die advies geven, die een opvlamming voorspellen of die zeggen wat je zou moeten doen. Niet omdat het technisch niet kan, maar omdat <a href="/">dat de grens is</a> die dit gereedschap bewust niet overgaat.</p>
+  </section>
+
+  <footer>
+    <p class="disclaimer"><strong>Crohnbook is geen medisch hulpmiddel.</strong> Dit kanaal is bedoeld voor vragen over de app, niet voor medische vragen. Voor alles wat met je behandeling te maken heeft: je MDL-arts, IBD-verpleegkundige of huisarts. Bij alarmsignalen bel je je poli.</p>
+    <nav aria-label="Voetmenu">
+      <a href="/">Start</a>
+      <a href="/aan-de-slag/">Aan de slag</a>
+      <a href="/voor-je-arts/">Voor je arts</a>
+      <a href="/privacy/">Je gegevens</a>
+    </nav>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  var form = document.getElementById('wensenform')
+  if (!form) return
+  var melding = document.getElementById('melding')
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault()
+
+    var wat = document.getElementById('wat').value.trim()
+    if (!wat) {
+      melding.hidden = false
+      document.getElementById('wat').focus()
+      return
+    }
+    melding.hidden = true
+
+    var waarom = document.getElementById('waarom').value.trim()
+    var vorm = document.getElementById('vorm').value
+
+    // De regels worden hier samengesteld en meteen doorgegeven aan het
+    // mailprogramma. Er wordt niets bewaard en niets verstuurd vanaf deze pagina.
+    var regels = ['Wat ik mis:', wat]
+    if (waarom) regels.push('', 'Wat het me zou opleveren:', waarom)
+    if (vorm) regels.push('', 'Behandelvorm: ' + vorm)
+    regels.push('', '---', 'Verstuurd via crohnbook.nl/wensen')
+
+    // Eén bron voor het adres: de zichtbare link onderaan de sectie.
+    var link = document.getElementById('mailadres')
+    var adres = link ? link.getAttribute('href').replace('mailto:', '') : ''
+    if (!adres) return
+
+    var onderwerp = 'Wens voor Crohnbook'
+    window.location.href =
+      'mailto:' + adres +
+      '?subject=' + encodeURIComponent(onderwerp) +
+      '&body=' + encodeURIComponent(regels.join('\n'))
+  })
+})()
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://crohnbook.nl/wensen/",
+  "url": "https://crohnbook.nl/wensen/",
+  "name": "Vertel wat je mist",
+  "inLanguage": "nl-NL",
+  "dateModified": "2026-08-21",
+  "description": "Vraag om een medicatievorm, een klacht of een functie die je mist in Crohnbook. Het bericht gaat via je eigen mailprogramma; er is geen formulier dat gegevens opslaat.",
+  "isPartOf": { "@id": "https://crohnbook.nl/#website" },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Crohnbook", "item": "https://crohnbook.nl/" },
+      { "@type": "ListItem", "position": 2, "name": "Wensen" }
+    ]
+  }
+}
+</script>
+
+</body>
+</html>

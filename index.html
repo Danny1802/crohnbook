@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Crohnbook — dagboek voor Crohn en colitis dat je telefoon niet verlaat</title>
-<meta name="description" content="Een gratis dagboek voor mensen met Crohn, colitis ulcerosa of IBD-U. Leg toiletbezoeken, voeding en medicatie vast en neem een overzicht mee naar je MDL-arts. Geen account, geen server: alles blijft op je eigen toestel.">
+<title>Crohnbook — logboek voor Crohn en colitis dat je telefoon niet verlaat</title>
+<meta name="description" content="Gratis logboek voor mensen met de ziekte van Crohn, colitis ulcerosa of IBD-U. Leg toiletbezoeken, voeding en medicatie vast en neem een leesbaar overzicht mee naar je MDL-arts. Geen account, geen server: je gegevens blijven op je eigen telefoon.">
 <link rel="canonical" href="https://crohnbook.nl/">
 <meta name="theme-color" content="#0a1018">
 
@@ -12,352 +12,81 @@
 <meta property="og:locale" content="nl_NL">
 <meta property="og:url" content="https://crohnbook.nl/">
 <meta property="og:site_name" content="Crohnbook">
-<meta property="og:title" content="Crohnbook — dagboek voor Crohn en colitis dat je telefoon niet verlaat">
-<meta property="og:description" content="Leg toiletbezoeken, voeding en medicatie vast en neem een overzicht mee naar je MDL-arts. Geen account, geen server.">
+<meta property="og:title" content="Crohnbook — logboek voor Crohn en colitis dat je telefoon niet verlaat">
+<meta property="og:description" content="Leg vast hoe het met je gaat en neem een leesbaar overzicht mee naar je MDL-arts. Geen account, geen server.">
 <meta property="og:image" content="https://crohnbook.nl/app/icon-512.png">
 <meta name="twitter:card" content="summary">
 
 <link rel="icon" href="/app/icon-192.png">
 <link rel="apple-touch-icon" href="/app/apple-touch-icon.png">
-
-<style>
-  :root {
-    color-scheme: dark;
-    --ink: #0a1018;
-    --surface: #141c28;
-    --raised: #1e2938;
-    --line: #2b384b;
-    --body: #e7eef7;
-    --muted: #8ea0b6;
-    --accent: #17b8a6;
-    --accent-deep: #0f6f66;
-    --caution: #f59e0b;
-    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  }
-
-  * { box-sizing: border-box; }
-
-  html { -webkit-text-size-adjust: 100%; }
-
-  body {
-    margin: 0;
-    background: var(--ink);
-    color: var(--body);
-    font-family: var(--sans);
-    font-size: 17px;
-    line-height: 1.65;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  .wrap {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0 22px;
-  }
-
-  h1, h2, h3 { text-wrap: balance; line-height: 1.18; margin: 0; letter-spacing: -0.02em; }
-  h1 { font-size: clamp(30px, 6.4vw, 44px); font-weight: 700; }
-  h2 { font-size: clamp(22px, 4.2vw, 28px); font-weight: 650; }
-  h3 { font-size: 18px; font-weight: 650; letter-spacing: -0.01em; }
-  p { margin: 0; }
-  a { color: var(--accent); }
-
-  section {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding: 44px 0;
-    border-top: 1px solid var(--line);
-  }
-  section p { color: var(--muted); }
-  section p.lead { color: var(--body); }
-
-  /* ---------- hero ---------- */
-
-  header.hero {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    padding: 56px 0 44px;
-  }
-  .mark {
-    display: flex;
-    align-items: center;
-    gap: 11px;
-    font-weight: 650;
-    letter-spacing: -0.01em;
-  }
-  .mark svg { display: block; }
-  .hero p.tagline {
-    font-size: clamp(18px, 3.4vw, 21px);
-    color: var(--muted);
-    max-width: 34ch;
-  }
-  .hero .who {
-    font-size: 15px;
-    color: var(--muted);
-    border-left: 2px solid var(--accent-deep);
-    padding-left: 14px;
-  }
-
-  /* ---------- installatieblok ---------- */
-
-  .install {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 22px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-  .install h2 { font-size: 20px; }
-  .install p { color: var(--muted); font-size: 15.5px; }
-
-  .variant { display: none; flex-direction: column; gap: 14px; }
-  .install[data-state="algemeen"] .variant[data-for="algemeen"],
-  .install[data-state="ios-safari"] .variant[data-for="ios-safari"],
-  .install[data-state="ios-anders"] .variant[data-for="ios-anders"],
-  .install[data-state="in-app"] .variant[data-for="in-app"],
-  .install[data-state="android"] .variant[data-for="android"],
-  .install[data-state="desktop"] .variant[data-for="desktop"],
-  .install[data-state="geinstalleerd"] .variant[data-for="geinstalleerd"] { display: flex; }
-
-  ol.stappen {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    counter-reset: s;
-  }
-  /* Het nummer staat absoluut gepositioneerd in plaats van als grid- of
-     flexcel. Tekst en <b> binnen één li zouden anders elk een eigen cel
-     worden, waardoor de regel per woord afbreekt. */
-  ol.stappen li {
-    counter-increment: s;
-    position: relative;
-    padding-left: 38px;
-    min-height: 26px;
-    font-size: 15.5px;
-    color: var(--body);
-  }
-  ol.stappen li::before {
-    content: counter(s);
-    position: absolute;
-    left: 0;
-    top: 1px;
-    display: grid;
-    place-items: center;
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    background: var(--raised);
-    border: 1px solid var(--line);
-    color: var(--muted);
-    font-size: 13px;
-    font-weight: 600;
-  }
-  ol.stappen .glyph {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 26px;
-    height: 26px;
-    vertical-align: -7px;
-    margin: 0 1px;
-    border-radius: 6px;
-    background: var(--raised);
-    border: 1px solid var(--line);
-    color: var(--accent);
-  }
-  ol.stappen .glyph svg { display: block; }
-
-  .knop {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 9px;
-    align-self: flex-start;
-    padding: 12px 20px;
-    border-radius: 10px;
-    border: 1px solid transparent;
-    background: var(--accent-deep);
-    color: #ffffff;
-    font: inherit;
-    font-size: 16px;
-    font-weight: 600;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  .knop:hover { background: #14837a; }
-  .knop.stil {
-    background: transparent;
-    border-color: var(--line);
-    color: var(--body);
-  }
-  .knop.stil:hover { background: var(--raised); }
-  a:focus-visible, button:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 3px;
-  }
-
-  .qr {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  .qr img {
-    width: 132px;
-    height: 132px;
-    padding: 10px;
-    background: var(--raised);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-  }
-  /* Alleen de kolom naast de code, niet het adresvakje dat erin zit. */
-  .qr > div { flex: 1 1 220px; display: flex; flex-direction: column; gap: 10px; }
-
-  .adres {
-    font-family: ui-monospace, "SF Mono", Consolas, monospace;
-    font-size: 15px;
-    color: var(--body);
-    background: var(--raised);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 8px 12px;
-    align-self: flex-start;
-  }
-
-  /* ---------- lijsten ---------- */
-
-  .kaarten {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 14px;
-  }
-  .kaart {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-  }
-  .kaart p { font-size: 15px; }
-
-  ul.punten {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 11px;
-  }
-  /* Zelfde reden als bij ol.stappen: de bolletjes staan absoluut, zodat de
-     tekst van een punt één doorlopende regel blijft. */
-  ul.punten li {
-    position: relative;
-    padding-left: 22px;
-    color: var(--muted);
-    font-size: 16px;
-  }
-  ul.punten li b { color: var(--body); font-weight: 650; }
-  ul.punten li::before {
-    content: "";
-    position: absolute;
-    left: 1px;
-    top: 10px;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--accent-deep);
-  }
-  ul.punten.niet li::before { background: var(--caution); }
-
-  /* ---------- faq ---------- */
-
-  .faq { display: flex; flex-direction: column; gap: 0; }
-  details {
-    border-bottom: 1px solid var(--line);
-    padding: 14px 0;
-  }
-  details:first-of-type { border-top: 1px solid var(--line); }
-  summary {
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 16.5px;
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    gap: 14px;
-    align-items: center;
-  }
-  summary::-webkit-details-marker { display: none; }
-  summary::after {
-    content: "+";
-    color: var(--muted);
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 1;
-  }
-  details[open] summary::after { content: "\2212"; }
-  details p { color: var(--muted); font-size: 15.5px; padding-top: 10px; }
-
-  /* ---------- footer ---------- */
-
-  footer {
-    border-top: 1px solid var(--line);
-    padding: 32px 0 56px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    font-size: 14px;
-    color: var(--muted);
-  }
-  footer strong { color: var(--body); font-weight: 600; }
-
-  @media (max-width: 480px) {
-    body { font-size: 16px; }
-    .install { padding: 18px; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    * { animation: none !important; transition: none !important; }
-  }
-</style>
+<link rel="stylesheet" href="/stijl.css">
 </head>
 <body>
 
-<div class="wrap">
-
-  <header class="hero">
-    <div class="mark">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+<div class="topbalk">
+  <div class="wrap">
+    <a class="merk" href="/">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
         <rect x="3" y="2.5" width="18" height="19" rx="3" stroke="#17b8a6" stroke-width="1.8"/>
         <path d="M7.5 2.5v19" stroke="#17b8a6" stroke-width="1.8"/>
-        <path d="M11 8.5h6M11 12h6M11 15.5h3.5" stroke="#8ea0b6" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M11 8.5h6M11 12h6M11 15.5h3.5" stroke="#97a8bd" stroke-width="1.6" stroke-linecap="round"/>
       </svg>
       Crohnbook
+    </a>
+    <nav aria-label="Hoofdmenu">
+      <a href="/aan-de-slag/">Aan de slag</a>
+      <a href="/voor-je-arts/">Voor je arts</a>
+      <a href="/privacy/">Je gegevens</a>
+      <a href="/wensen/">Wensen</a>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="kop">
+    <h1>Een logboek voor je darmen dat je telefoon niet verlaat</h1>
+
+    <p class="tagline">Leg vast hoe het met je gaat bij de ziekte van Crohn, colitis ulcerosa of IBD-U — en neem een leesbaar overzicht mee naar je MDL-arts.</p>
+
+    <p class="antwoord"><strong>Crohnbook is een gratis webapp waarmee je bij een chronische darmontsteking je toiletbezoeken, voeding, medicatie en dagelijkse klachten bijhoudt.</strong> Alles wordt opgeslagen op je eigen toestel. Er is geen account, geen server en geen bedrijf dat meekijkt.</p>
+  </header>
+
+  <section>
+    <h2>Waarom je dit durft in te vullen</h2>
+
+    <p class="lead">Hoe vaak je naar de wc moest, of er bloed bij zat, hoe hard je het moest houden — dat is niet zomaar gezondheidsinformatie. Dat is het soort informatie waarvan je liever niet hebt dat er ergens een kopie van rondslingert.</p>
+
+    <p>Daarom is Crohnbook gebouwd op een keuze die je bijna nergens anders ziet: <b>er is geen server</b>. Je dagboek staat in de opslag van je telefoon zelf, net als je foto's. Het wordt nergens naartoe gestuurd, want er is nergens om het naartoe te sturen.</p>
+
+    <div class="kaarten">
+      <div class="kaart">
+        <h3>Geen account</h3>
+        <p>Je hoeft geen e-mailadres, telefoonnummer of wachtwoord op te geven. Je opent hem en je begint.</p>
+      </div>
+      <div class="kaart">
+        <h3>Geen verzending</h3>
+        <p>Wat je invult verlaat je toestel niet. Je kunt hem in vliegtuigmodus gebruiken en alles blijft werken.</p>
+      </div>
+      <div class="kaart">
+        <h3>Geen meekijkers</h3>
+        <p>Geen trackers, geen advertenties, geen statistieken. Deze pagina zet zelfs geen cookies — vandaar geen cookiemelding.</p>
+      </div>
+      <div class="kaart">
+        <h3>Jij houdt de sleutel</h3>
+        <p>Je exporteert zelf een back-upbestand wanneer je wilt. Niemand anders kan bij je gegevens, ook de maker niet.</p>
+      </div>
     </div>
 
-    <h1>Een dagboek voor je darmen dat je telefoon niet verlaat</h1>
-
-    <p class="tagline">Leg vast wat er gebeurt bij Crohn, colitis ulcerosa of IBD-U — en neem een leesbaar overzicht mee naar je MDL-arts.</p>
-
-    <p class="who">Gemaakt door iemand met de ziekte van Crohn, voor eigen gebruik. Gratis, zonder account, zonder advertenties. Er zit geen bedrijf achter.</p>
-  </header>
+    <p>De keerzijde noemen we er meteen bij, want die hoort erbij: raak je je telefoon kwijt zonder back-up, dan is je logboek weg. <a href="/privacy/">Lees precies wat er met je gegevens gebeurt</a>.</p>
+  </section>
 
   <section>
     <div class="install" id="install" data-state="algemeen">
       <h2>Op je beginscherm zetten</h2>
 
-      <!-- Zonder JavaScript, en voor zoekmachines: de korte versie voor beide platformen. -->
       <div class="variant" data-for="algemeen">
-        <p>Crohnbook is geen app uit een appstore maar een webapp. Je zet hem rechtstreeks op je beginscherm, waarna hij opent als een gewone app — zonder adresbalk, en ook zonder internet.</p>
+        <p>Crohnbook komt niet uit een appstore. Je zet hem rechtstreeks op je beginscherm, waarna hij opent als een gewone app — zonder adresbalk, en ook zonder internet.</p>
         <ol class="stappen">
           <li><b>iPhone:</b> open <span class="adres">crohnbook.nl/app</span> in Safari, tik op het deelicoon en kies <b>Zet op beginscherm</b>.</li>
           <li><b>Android:</b> open het adres in Chrome, tik op de drie puntjes en kies <b>App installeren</b>.</li>
@@ -389,7 +118,7 @@
       <div class="variant" data-for="ios-anders">
         <p>Je bekijkt deze pagina niet in Safari. Op de iPhone en iPad kan alléén Safari een webapp aan je beginscherm toevoegen — in Chrome, Firefox of Edge zit die knop er niet in.</p>
         <p>Kopieer het adres hieronder, open Safari en plak het in de adresbalk.</p>
-        <div class="adres" id="adres-anders">crohnbook.nl/app</div>
+        <div class="adres">crohnbook.nl/app</div>
         <button class="knop" type="button" data-kopieer="https://crohnbook.nl/app/">Adres kopiëren</button>
       </div>
 
@@ -424,7 +153,7 @@
 
       <div class="variant" data-for="geinstalleerd">
         <p>Je hebt Crohnbook al op je toestel staan — je bekijkt deze pagina vanuit de geïnstalleerde app.</p>
-        <a class="knop" href="/app/">Naar je dagboek</a>
+        <a class="knop" href="/app/">Naar je logboek</a>
       </div>
     </div>
   </section>
@@ -443,25 +172,42 @@
       </div>
       <div class="kaart">
         <h3>Medicatie</h3>
-        <p>Injecties met een rotatieschema voor de prikplek, plus pijnstillers. Je ziet waar je zit in de cyclus tot je volgende dosis.</p>
+        <p>Wat je gebruikt en wanneer. Bij injecties ook een rotatieschema voor de prikplek en waar je zit in de cyclus tot je volgende dosis.</p>
       </div>
       <div class="kaart">
         <h3>Avondcheck</h3>
-        <p>Aan het eind van de dag een korte vragenlijst over hoe het ging. Daaruit komen je scores en de grafieken over langere tijd.</p>
+        <p>Aan het eind van de dag een korte vragenlijst. Daaruit komen je scores en de grafieken die het beloop over langere tijd laten zien.</p>
       </div>
     </div>
   </section>
 
   <section>
-    <h2>Waarom er geen account is</h2>
-    <p class="lead">Hoe vaak je naar de wc gaat en hoeveel bloed je ziet, is ongeveer de meest persoonlijke informatie die er bestaat. Die hoort niet op de server van een onbekende partij te staan.</p>
-    <ul class="punten">
-      <li><b>Alles blijft op je toestel.</b> Crohnbook slaat je dagboek op in je telefoon zelf. Er is geen server waar het naartoe gestuurd wordt, want er is helemaal geen server.</li>
-      <li><b>Geen inloggen, geen e-mailadres.</b> Je hoeft niets in te vullen om te beginnen. Er is niemand die weet dat je hem gebruikt.</li>
-      <li><b>Geen trackers en geen advertenties.</b> Deze pagina meet niets en zet geen cookies. Er is dan ook geen cookiemelding.</li>
-      <li><b>Werkt zonder internet.</b> Handig op een wc zonder bereik, en meteen het bewijs dat er niets weggestuurd wordt.</li>
-      <li><b>Jij maakt de back-ups.</b> Dat is de keerzijde: raak je je telefoon kwijt zonder export, dan is je dagboek weg. Exporteer af en toe een bestand.</li>
-    </ul>
+    <h2>De eerste keer duurt iets langer</h2>
+
+    <p class="antwoord">Bij het eerste gebruik vraagt Crohnbook een paar dingen over jouw situatie: je diagnose, waar in je darm het speelt, en welke medicatie je gebruikt en in welk ritme.</p>
+
+    <p>Dat is geen formulier om de formulier. Het is nodig omdat <b>geen twee IBD-patiënten dezelfde behandeling hebben</b>. De een spuit elke twee weken een biological, de ander slikt dagelijks tabletten, een derde krijgt om de acht weken een infuus in het ziekenhuis, en weer een ander gebruikt tijdelijk prednison in een afbouwschema.</p>
+
+    <p>Voor een logboek maakt dat alles uit. Bij een injectie om de veertien dagen is de vraag "hoe ging het vlak vóór je volgende prik" een heel andere vraag dan bij een tablet die je elke ochtend neemt. Zonder te weten welk ritme jij hebt, staan je klachten los in de tijd en valt er weinig zinnigs over te zeggen.</p>
+
+    <div class="blok let-op">
+      <h3>Wat dit níét betekent</h3>
+      <p>Crohnbook gebruikt die gegevens alleen om jouw eigen overzicht op te bouwen en om je rapportage kloppend te maken. Ze blijven op je toestel, net als de rest. Er wordt niets mee vergeleken, niets mee geadviseerd en niets mee doorgestuurd.</p>
+    </div>
+
+    <p>Reken op een paar minuten voor die eerste keer. Daarna kost een toiletbezoek vastleggen enkele seconden. <a href="/aan-de-slag/">Zie wat je bij de hand wilt hebben voordat je begint</a>.</p>
+  </section>
+
+  <section>
+    <h2>Wat je arts hieraan heeft</h2>
+
+    <p class="antwoord">Op de poli krijg je vrijwel altijd dezelfde vraag: hoe is het de afgelopen periode gegaan? Bijna niemand weet dat precies. Crohnbook maakt daar een overzicht van dat je kunt laten zien of uitprinten.</p>
+
+    <p>Dat verschil is groter dan het klinkt. "Het ging wel redelijk, geloof ik" is iets anders dan een overzicht waarop je arts ziet dat je in week drie zeven keer per dag ging met bloed erbij, en in week zes twee keer zonder. Het eerste is een herinnering die vervormt. Het tweede is een waarneming.</p>
+
+    <p>Wat er in het overzicht staat: je aantallen per dag, de Bristol-verdeling, bloed en nachtelijke gang, je scores over de periode, en het verband met je medicatieritme. In een opmaak die op papier leesbaar is, niet alleen op een scherm.</p>
+
+    <a class="knop stil" href="/voor-je-arts/">Wat je meeneemt naar je afspraak</a>
   </section>
 
   <section>
@@ -470,9 +216,26 @@
     <ul class="punten niet">
       <li><b>Het geeft geen advies.</b> Crohnbook registreert, rekent en rapporteert. Het zegt nooit wat je moet doen, wat je zou moeten laten of hoe het met je gaat.</li>
       <li><b>Het wijst geen voedingstriggers aan.</b> Verbanden tussen eten en klachten heten hier "bespreekpunt voor je diëtist". Op eigen houtje voedsel schrappen op basis van een grafiek levert vaker een tekort op dan rust.</li>
-      <li><b>Het stelt geen diagnose en voorspelt geen opvlamming.</b> Interpretatie is het werk van je MDL-arts, IBD-verpleegkundige en diëtist. Crohnbook levert ze alleen betere gegevens om mee te werken.</li>
+      <li><b>Het stelt geen diagnose en voorspelt geen opvlamming.</b> Duiden is het werk van je MDL-arts, IBD-verpleegkundige en diëtist. Crohnbook levert ze alleen betere gegevens om mee te werken.</li>
       <li><b>Het is geen medisch hulpmiddel.</b> Het vervangt geen enkel contact met je behandelaar, en bij alarmsignalen bel je gewoon je poli.</li>
     </ul>
+  </section>
+
+  <section>
+    <h2>Wie dit maakt</h2>
+    <div class="maker">
+      <div class="cirkel">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="8" r="3.6" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M4.5 20c0-3.6 3.4-6 7.5-6s7.5 2.4 7.5 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="tekst">
+        <p>Crohnbook is gebouwd door iemand met de ziekte van Crohn, voor zichzelf. De aanleiding was een polibezoek waarop de vraag "hoe ging het de afgelopen maanden" niet te beantwoorden was.</p>
+        <p>Er zit geen bedrijf achter, geen investeerder en geen farmaceut. Niemand verdient hieraan, en dat is precies waarom er geen reden is om je gegevens te verzamelen.</p>
+        <p>Dat betekent ook iets voor wat je mag verwachten: dit is geen dienst met een helpdesk. Het is gereedschap dat werkt en dat gedeeld wordt omdat het voor iemand anders misschien ook nuttig is.</p>
+      </div>
+    </div>
   </section>
 
   <section>
@@ -480,10 +243,10 @@
     <div class="faq">
       <details>
         <summary>Kost het geld?</summary>
-        <p>Nee. Er is geen proefperiode, geen abonnement en geen betaalde versie. De app draait op je eigen toestel, dus er zijn ook nauwelijks kosten om te dekken.</p>
+        <p>Nee. Er is geen proefperiode, geen abonnement en geen betaalde versie. De app draait op je eigen toestel, dus er zijn nauwelijks kosten om te dekken.</p>
       </details>
       <details>
-        <summary>Staat mijn dagboek in een appstore?</summary>
+        <summary>Staat mijn logboek in een appstore?</summary>
         <p>Nee, Crohnbook is een webapp. Je opent hem in je browser en zet hem op je beginscherm, waarna hij zich gedraagt als elke andere app. Dat scheelt jou een appstore-account en scheelt hem een goedkeuringsproces.</p>
       </details>
       <details>
@@ -491,27 +254,46 @@
         <p>Ja. De naam komt van de ziekte van Crohn, maar wat je vastlegt — ontlasting, bloed, aandrang, voeding, medicatie — is bij colitis ulcerosa en IBD-U hetzelfde.</p>
       </details>
       <details>
+        <summary>Werkt het met mijn medicatie?</summary>
+        <p>Bij het eerste gebruik geef je op wat je gebruikt en in welk ritme: dagelijkse tabletten, een injectie om de zoveel weken, een infuus in het ziekenhuis of een afbouwschema. Crohnbook rekent daarmee, in plaats van uit te gaan van één standaardbehandeling.</p>
+        <p>Mis je een toedieningsvorm of een schema dat niet past? <a href="/wensen/">Laat het weten</a> — daar is dit nog te jong voor om alles al te kennen.</p>
+      </details>
+      <details>
         <summary>Kan ik mijn gegevens meenemen naar mijn arts?</summary>
-        <p>Ja. Je maakt een overzicht over een periode die je zelf kiest, met je scores en grafieken erin. Dat is bedoeld om uit te printen of te laten zien tijdens je afspraak, niet om te vervangen wat je zelf vertelt.</p>
+        <p>Ja. Je maakt een overzicht over een periode die je zelf kiest, met je aantallen, scores en grafieken erin. Dat is bedoeld om uit te printen of te laten zien tijdens je afspraak, niet om te vervangen wat je zelf vertelt.</p>
       </details>
       <details>
         <summary>Wat als ik mijn telefoon kwijtraak?</summary>
-        <p>Dan is je dagboek weg, tenzij je een back-up hebt geëxporteerd. Dat is de prijs van de keuze om niets in een cloud te bewaren. Exporteer daarom af en toe een bestand naar je eigen opslag.</p>
+        <p>Dan is je logboek weg, tenzij je een back-up hebt geëxporteerd. Dat is de prijs van de keuze om niets in een cloud te bewaren. Exporteer daarom af en toe een bestand naar je eigen opslag.</p>
       </details>
       <details>
         <summary>Kan ik hem op meerdere apparaten gebruiken?</summary>
         <p>Niet tegelijk met dezelfde gegevens — er is geen synchronisatie, want daar zou een server voor nodig zijn. Je kunt wel een export op een ander toestel importeren.</p>
       </details>
       <details>
-        <summary>Wie zit hierachter?</summary>
-        <p>Eén persoon met de ziekte van Crohn die het voor zichzelf bouwde en het daarna online zette. Geen bedrijf, geen investeerder, geen farmaceut.</p>
+        <summary>Wie kan er bij mijn gegevens?</summary>
+        <p>Alleen jij, op het toestel waar ze staan. Er is geen beheerder, geen database en geen back-upserver. Ook de maker kan niet zien dat je Crohnbook gebruikt, laat staan wat je invult.</p>
       </details>
     </div>
   </section>
 
+  <section>
+    <h2>Mis je iets?</h2>
+    <p class="lead">IBD ziet er bij niemand hetzelfde uit. Wat voor jou het verschil maakt, staat er misschien nog niet in.</p>
+    <p>Een medicijn in een vorm die nog niet herkend wordt, een klacht die je wilt bijhouden en die er niet bij staat, een stoma, een pouch, gewrichtsklachten of vermoeidheid die je wilt meenemen — het mag allemaal gevraagd worden.</p>
+    <a class="knop" href="/wensen/">Vertel wat je mist</a>
+  </section>
+
   <footer>
-    <p><strong>Crohnbook is geen medisch hulpmiddel.</strong> Het registreert wat jij invult en rekent daarmee. Het stelt geen diagnoses en geeft geen behandeladvies. Interpretatie ligt bij je MDL-arts, IBD-verpleegkundige en diëtist. Twijfel je of gaat het slechter — bel je poli.</p>
+    <p class="disclaimer"><strong>Crohnbook is geen medisch hulpmiddel.</strong> Het registreert wat jij invult en rekent daarmee. Het stelt geen diagnoses en geeft geen behandeladvies. Duiding ligt bij je MDL-arts, IBD-verpleegkundige en diëtist. Twijfel je of gaat het slechter — bel je poli.</p>
+    <nav aria-label="Voetmenu">
+      <a href="/aan-de-slag/">Aan de slag</a>
+      <a href="/voor-je-arts/">Voor je arts</a>
+      <a href="/privacy/">Je gegevens</a>
+      <a href="/wensen/">Wensen</a>
+    </nav>
     <p>Gratis, zonder account en zonder trackers. Deze pagina zet geen cookies.</p>
+    <p class="bijwerk">Laatst bijgewerkt: 21 augustus 2026</p>
   </footer>
 
 </div>
@@ -526,122 +308,46 @@
       "url": "https://crohnbook.nl/",
       "name": "Crohnbook",
       "inLanguage": "nl-NL",
-      "description": "Dagboek voor mensen met Crohn, colitis ulcerosa of IBD-U. Alles blijft op je eigen toestel."
+      "description": "Logboek voor mensen met de ziekte van Crohn, colitis ulcerosa of IBD-U. Alles blijft op je eigen toestel."
     },
     {
       "@type": "SoftwareApplication",
+      "@id": "https://crohnbook.nl/#app",
       "name": "Crohnbook",
       "url": "https://crohnbook.nl/app/",
       "applicationCategory": "HealthApplication",
       "operatingSystem": "iOS, Android, web",
       "inLanguage": "nl-NL",
-      "description": "Webapp om toiletbezoeken, voeding en medicatie bij te houden bij inflammatoire darmziekten. Werkt offline en slaat alles lokaal op het toestel op.",
+      "isAccessibleForFree": true,
+      "description": "Webapp om bij inflammatoire darmziekten toiletbezoeken, voeding, medicatie en dagelijkse klachten bij te houden. Werkt offline en slaat alles lokaal op het toestel op, zonder account en zonder server.",
+      "featureList": [
+        "Toiletbezoeken vastleggen met Bristol-type, bloed en aandrang",
+        "Voeding vastleggen met foto en korte notitie",
+        "Medicatie bijhouden, ook injecties met rotatieschema",
+        "Dagelijkse avondcheck met scores over langere tijd",
+        "Rapportage om mee te nemen naar de MDL-arts",
+        "Volledig offline, zonder account of dataverzending"
+      ],
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
     },
     {
       "@type": "FAQPage",
+      "@id": "https://crohnbook.nl/#faq",
       "mainEntity": [
-        { "@type": "Question", "name": "Kost het geld?", "acceptedAnswer": { "@type": "Answer", "text": "Nee. Er is geen proefperiode, geen abonnement en geen betaalde versie." } },
-        { "@type": "Question", "name": "Staat mijn dagboek in een appstore?", "acceptedAnswer": { "@type": "Answer", "text": "Nee, Crohnbook is een webapp. Je opent hem in je browser en zet hem op je beginscherm, waarna hij zich gedraagt als elke andere app." } },
-        { "@type": "Question", "name": "Werkt het ook voor colitis ulcerosa of IBD-U?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. De naam komt van de ziekte van Crohn, maar wat je vastlegt is bij colitis ulcerosa en IBD-U hetzelfde." } },
-        { "@type": "Question", "name": "Kan ik mijn gegevens meenemen naar mijn arts?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Je maakt een overzicht over een zelfgekozen periode met scores en grafieken, bedoeld om te laten zien tijdens je afspraak." } },
-        { "@type": "Question", "name": "Wat als ik mijn telefoon kwijtraak?", "acceptedAnswer": { "@type": "Answer", "text": "Dan is je dagboek weg, tenzij je een back-up hebt geëxporteerd. Er wordt niets in een cloud bewaard." } },
-        { "@type": "Question", "name": "Wie zit hierachter?", "acceptedAnswer": { "@type": "Answer", "text": "Eén persoon met de ziekte van Crohn die het voor zichzelf bouwde en het daarna online zette. Geen bedrijf en geen farmaceut." } }
+        { "@type": "Question", "name": "Kost Crohnbook geld?", "acceptedAnswer": { "@type": "Answer", "text": "Nee. Er is geen proefperiode, geen abonnement en geen betaalde versie. De app draait op je eigen toestel." } },
+        { "@type": "Question", "name": "Staat Crohnbook in een appstore?", "acceptedAnswer": { "@type": "Answer", "text": "Nee, Crohnbook is een webapp. Je opent hem in je browser en zet hem op je beginscherm, waarna hij zich gedraagt als elke andere app." } },
+        { "@type": "Question", "name": "Werkt Crohnbook ook voor colitis ulcerosa of IBD-U?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. De naam komt van de ziekte van Crohn, maar wat je vastlegt — ontlasting, bloed, aandrang, voeding, medicatie — is bij colitis ulcerosa en IBD-U hetzelfde." } },
+        { "@type": "Question", "name": "Werkt Crohnbook met mijn medicatie?", "acceptedAnswer": { "@type": "Answer", "text": "Bij het eerste gebruik geef je op wat je gebruikt en in welk ritme: dagelijkse tabletten, een injectie om de zoveel weken, een infuus in het ziekenhuis of een afbouwschema. Crohnbook rekent daarmee in plaats van uit te gaan van één standaardbehandeling." } },
+        { "@type": "Question", "name": "Kan ik mijn gegevens meenemen naar mijn arts?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Je maakt een overzicht over een zelfgekozen periode met aantallen, scores en grafieken, bedoeld om uit te printen of te laten zien tijdens je afspraak." } },
+        { "@type": "Question", "name": "Wat gebeurt er als ik mijn telefoon kwijtraak?", "acceptedAnswer": { "@type": "Answer", "text": "Dan is je logboek weg, tenzij je een back-up hebt geëxporteerd. Er wordt niets in een cloud bewaard." } },
+        { "@type": "Question", "name": "Wie kan er bij mijn gegevens in Crohnbook?", "acceptedAnswer": { "@type": "Answer", "text": "Alleen jij, op het toestel waar ze staan. Er is geen beheerder, geen database en geen back-upserver. Ook de maker kan niet zien dat je Crohnbook gebruikt." } }
       ]
     }
   ]
 }
 </script>
 
-<script>
-(function () {
-  var blok = document.getElementById('install');
-  if (!blok) return;
-
-  var ua = navigator.userAgent;
-
-  // iPadOS meldt zich sinds versie 13 als macOS. Een Mac met aanraakscherm
-  // bestaat niet, dus die combinatie verraadt een iPad.
-  var isIPad = /iPad/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-  var isIOS = /iPhone|iPod/.test(ua) || isIPad;
-
-  // Vensters binnen een andere app (sociale media, mailclients). Daar zit geen
-  // deelmenu met "Zet op beginscherm" in, hoe goed je ook zoekt.
-  var isInApp = /FBAN|FBAV|FB_IAB|Instagram|LinkedInApp|Snapchat|Pinterest|Line\//i.test(ua);
-
-  // Op iOS mag alleen Safari toevoegen aan het beginscherm. Chrome, Firefox en
-  // Edge draaien daar op dezelfde motor maar missen die menuoptie.
-  var isIOSAndereBrowser = isIOS && /CriOS|FxiOS|EdgiOS|OPiOS|YaBrowser/.test(ua);
-
-  var isAndroid = /Android/.test(ua);
-
-  var staatOpBeginscherm =
-    window.navigator.standalone === true ||
-    (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches);
-
-  var stand;
-  if (staatOpBeginscherm) stand = 'geinstalleerd';
-  else if (isInApp) stand = 'in-app';
-  else if (isIOSAndereBrowser) stand = 'ios-anders';
-  else if (isIOS) stand = 'ios-safari';
-  else if (isAndroid) stand = 'android';
-  else stand = 'desktop';
-
-  blok.setAttribute('data-state', stand);
-
-  // Het deelicoon zit op de iPhone onderin en op de iPad rechtsboven.
-  if (stand === 'ios-safari' && isIPad) {
-    var iphone = blok.querySelector('[data-plek="iphone"]');
-    var ipad = blok.querySelector('[data-plek="ipad"]');
-    if (iphone) iphone.hidden = true;
-    if (ipad) ipad.hidden = false;
-  }
-
-  // Android en desktop-Chrome bieden een echte installatieknop aan. Die mag pas
-  // verschijnen als de browser hem daadwerkelijk aanbiedt.
-  var bewaardeMelding = null;
-  window.addEventListener('beforeinstallprompt', function (e) {
-    e.preventDefault();
-    bewaardeMelding = e;
-    var knop = document.getElementById('android-installeer');
-    var handmatig = document.getElementById('android-handmatig');
-    if (!knop) return;
-    knop.hidden = false;
-    if (handmatig) handmatig.hidden = true;
-    if (stand === 'desktop') blok.setAttribute('data-state', 'android');
-  });
-
-  var installeerKnop = document.getElementById('android-installeer');
-  if (installeerKnop) {
-    installeerKnop.addEventListener('click', function () {
-      if (!bewaardeMelding) return;
-      bewaardeMelding.prompt();
-      bewaardeMelding = null;
-      installeerKnop.hidden = true;
-    });
-  }
-
-  // Adres kopiëren, met de uitkomst in de knop zelf zodat er geen melding
-  // overheen hoeft te komen.
-  Array.prototype.forEach.call(blok.querySelectorAll('[data-kopieer]'), function (knop) {
-    var oorspronkelijk = knop.textContent;
-    knop.addEventListener('click', function () {
-      var adres = knop.getAttribute('data-kopieer');
-      var klaar = function () {
-        knop.textContent = 'Gekopieerd';
-        setTimeout(function () { knop.textContent = oorspronkelijk; }, 2400);
-      };
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(adres).then(klaar, function () {
-          knop.textContent = 'Kopiëren lukt niet — typ het adres over';
-        });
-      } else {
-        knop.textContent = 'Kopiëren lukt niet — typ het adres over';
-      }
-    });
-  });
-})();
-</script>
+<script src="/installeren.js" defer></script>
 
 </body>
 </html>
