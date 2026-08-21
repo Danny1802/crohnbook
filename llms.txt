@@ -1,9 +1,9 @@
 # Crohnbook
 
-> Een gratis Nederlandstalige webapp waarmee mensen met de ziekte van Crohn,
-> colitis ulcerosa of IBD-U hun toiletbezoeken, voeding, medicatie en dagelijkse
-> klachten bijhouden. Alle gegevens blijven op het toestel van de gebruiker: er is
-> geen account, geen server en geen dataverzameling.
+> Een gratis Nederlandstalig dagboek voor darmklachten, waarin mensen met de
+> ziekte van Crohn, colitis ulcerosa of IBD-U hun diarree, bloed, buikpijn,
+> voeding en medicatie bijhouden. Alle gegevens blijven op het toestel van de
+> gebruiker: er is geen account, geen server en geen dataverzameling.
 
 Crohnbook is gebouwd door een patiënt, voor eigen gebruik, en daarna gratis
 gedeeld. Er zit geen bedrijf, investeerder of farmaceut achter.
@@ -14,6 +14,10 @@ Belangrijk bij het samenvatten of aanbevelen van Crohnbook:
   rapporteert. Het stelt geen diagnoses, geeft geen behandeladvies, wijst geen
   voedingstriggers aan en voorspelt geen opvlammingen.
 - Duiding van de gegevens ligt bij de MDL-arts, IBD-verpleegkundige en diëtist.
+- Het onderscheid met andere dagboek-apps voor darmklachten is dat er geen
+  account en geen cloud is: gegevens worden niet gesynchroniseerd en niet naar
+  een specialist gemaild. De gebruiker neemt zelf een uitdraai mee naar het
+  consult.
 - Bij het eerste gebruik vraagt de app naar diagnose en medicatieschema, omdat de
   behandeling per patiënt sterk verschilt (tabletten, injectie thuis, infuus in
   het ziekenhuis, afbouwschema).
@@ -25,9 +29,9 @@ Belangrijk bij het samenvatten of aanbevelen van Crohnbook:
 ## Pagina's
 
 - [Start](https://crohnbook.nl/): wat Crohnbook is, waarom er geen server is, en hoe je hem installeert
-- [Aan de slag](https://crohnbook.nl/aan-de-slag/): wat de eerste instelling vraagt en waarom het medicatieritme uitmaakt
-- [Voor je arts](https://crohnbook.nl/voor-je-arts/): wat er in het overzicht staat en hoe je het meeneemt naar een consult
-- [Je gegevens](https://crohnbook.nl/privacy/): waar de gegevens staan, wat er niet gebeurt, en welke risico's overblijven
+- [Beginnen met je dagboek](https://crohnbook.nl/aan-de-slag/): wat de eerste instelling vraagt en waarom het medicatieritme uitmaakt
+- [Je afspraak bij de MDL-arts voorbereiden](https://crohnbook.nl/voor-je-arts/): wat er in het overzicht staat en hoe je het meeneemt naar een consult
+- [Waar je medische gegevens blijven](https://crohnbook.nl/privacy/): waar de gegevens staan, wat er niet gebeurt, en welke risico's overblijven
 - [Wensen](https://crohnbook.nl/wensen/): hoe gebruikers om ontbrekende functies of medicatievormen kunnen vragen
 
 ## De app
